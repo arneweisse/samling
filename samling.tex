@@ -3,6 +3,7 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{multicol}
 \usepackage[hyphens]{url}
+\usepackage[swedish]{babel}
 \usepackage[hidelinks]{hyperref}
 \usepackage{dirtytalk}
 \usepackage{qrcode}
@@ -15,7 +16,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.0pt}
 \cfoot{\thepage\\
-{\tiny Skriv ut en kopia av detta dokument: \href{http://goo.gl/vbce1U}{goo.gl/vbce1U} - QR-Kod på sista sidan}}
+{\tiny Skriv ut en kopia av detta dokument: \href{http://goo.gl/vbce1U}{goo.gl/vbce1U} - \today}}
 \newfontfamily\Emoji{OpenSansEmoji}
 
 \makeatletter
@@ -69,7 +70,40 @@ end}
 
 \begin{document}
 
-\entry{20 juni 2010}{
+{
+\LARGE Skriv ut detta dokument:
+
+\bigskip
+
+\begin{tabular*}{\textwidth}{l m{\textwidth-4cm}}
+\qrcode{http://arneweisse.github.io/samling/samling.html} & \url{http://arneweisse.github.io/samling/samling.html} \\
+\\
+\qrcode{https://github.com/arneweisse/samling/raw/master/samling.pdf} & \url{https://github.com/arneweisse/samling/raw/master/samling.pdf} \\
+\\
+\qrcode{http://github.com/arneweisse/samling} & \url{http://github.com/arneweisse/samling} \\
+\end{tabular*}
+}
+
+
+
+\begin{multicols}{2}
+
+Detta dokument samlar läkares, patienters, funktionsnedsattas och kritikers röster om sjukförsäkringen. De allra flesta texter är daterade september till november 2017.
+
+Kodrutan bredvid alla länkar är en så kallad QR-kod, från engelskans \say{Quick Response}. Den fungerar ungefär som streckkoderna på varor i mataffären. Genom ett gratisprogram i mobilen kan man skanna koden med hjälp av mobilens kamera och på så sätt slippa skriva in länkadressen själv. Sök i din mobils \say{app-store} efter \say{QR} så får du en lista på olika gratisprogram. Efter att man har skannat in koden kan man själv välja om man vill öppna länken eller ej.
+
+Alla QR-koder i detta dokument motsvarar alltid exakt den länkadress som står bredvid den.
+
+I den digitala versionen av detta dokument, som återfinns på ovanstående länkar, är alla länkar klickbara.
+
+Skriv ut en kopia, twittra, dela och diskutera med vänner och kollegor! Sjukdom, hjärnskador, stroke m.m. kan drabba alla människor, även dig själv och dina närmsta.
+
+\end{multicols}
+
+\medskip
+\hrule
+
+\entry{20 juni 2010 - Kritiker: Staten bryter mot lagen}{
 Socialförsäkringar som till exempel sjukpenningen beskrivs ofta som stora kostnader för staten. Men tvärtom mot vad många tror så tjänar statskassan miljarder på försäkringarna – varje år.
 
 Förklaringen är att staten tar ut mycket mer i avgift för socialförsäkringen än vad som betalas ut till kunderna ? det vill säga folket. Det är fel, menar kritikerna.}
@@ -94,6 +128,7 @@ Den som tror att nivån på kapacitet styr nivån på komptenens och vice versa 
 \entry{14 feb 2017 - Den dolda sjukfrånvaron växer}{Nyligen pratade jag med A, en undersköterska som fått sin sjukpenning på deltid indragen av Försäkringskassan (FK). Hon valde då, i samråd med arbetsgivaren, att omvandla sin heltidsanställning till en deltidstjänst.
 
 Hon orkade inte längre bråka med FK, trots att hennes läkare och arbetskamrater tycker hon borde stå på sig och begära omprövning. \say{Min 80-åriga mamma ligger för döden och jag är hennes enda stöd. Jag orkar inte samtidigt slåss mot FK}, sa hon.}{http://www.nsd.se/nyheter/den-dolda-sjukfranvaron-vaxer-nm4452835.aspx}
+
 
 \entry{15 feb 2017 - Min (o)tur nu?}{Så­ efter sex års sjukskrivning, 27 läkarintyg utan anmärkning och noll tvekan från någon om att jag har behov av att vara sjukskriven ­ så duger helt plötsligt inte det underlag som finns. Och utifrån ett ofullständigt läkarintyg drar de alltså slutsatsen att jag inte längre saknar arbetsförmåga.}{http://livetsbilder.blogspot.se/2017/02/min-otur-nu.html}
 
@@ -1057,6 +1092,12 @@ Men det räcker inte, menar politiker och företrädare för handikapprörelsen.
 Eller är det ok att man ska tillslut stå på gatan hungrig?
 Eller hur har ni tänkt? Jag undrar? \hash{försäkringskassan} \hash{avgå} \hash{undrar}}{https://twitter.com/tommysw/status/930491795879972864}
 
+\entry{14 nov 2017 - Läge för \say{Vi står inte ut 2.0}?}{Det håller inte att måla ut dem som är beroende av personlig assistans för att leva ett värdigt liv som en grupp fuskare som försöker pungslå samhället på så stora belopp som möjligt. Inte när barn som behöver som sondmatning för att få i sig näring inte längre kan få samhällets hjälp eller vuxna tvingas säga upp sig från jobbet samtidigt som deras assistenter får se sig om efter annan sysselsättning.
+
+Till och med Försäkringskassan, som i stor utsträckning fått spela rollen som bov i dramat, har insett att det blir svårt att tillämpa en dom i Högsta förvaltningsdomstolen från i somras utan att tusentals personers liv slås i spillror.}{http://www.dagen.se/ledare/lage-for-vi-star-inte-ut-2-0-1.1055372}
+
+
+
 
 \entry{15 nov 2017 - Försäkringskassan trotsar regeringens viljeyttring}{Vi mottog med stor förvåning försäkringskassans pressmeddelande angående regeringens aviserade åtgärdspaket om den statliga assistansen. DHR anser att regeringen var väldigt tydlig med att alla två års omprövningar snarast ska upphöra.
 
@@ -1099,6 +1140,13 @@ John Green\\
 \emph{Turtles All the Way Down}
 \end{quotation}}{https://twitter.com/BrainBreakage/status/931405432358363137}
 
+\entry{16 nov 2017 - Äntligen backar Regnér}{Men det är inte företag som beviljar timmarna, utan Försäkringskassan — Regnérs slag mot företagen slog i stället undan benen för de människor hon är satt att värna. Ingen drabbas som behöver hjälp, lovade Regnér. Men i snart två år har nu fyra av fem människor som för första gången söker assistans fått avslag — kostnaderna lär sluta dryga miljarden under budget. Barn med stora behov tvingas bo på sjukhus, eftersom deras läkare inte vågar släppa hem dem utan tillräcklig assistans. Kommuner planerar nya barnhem.
+
+Maria Persdotter, ordförande Riksförbundet för Rörelsehindrade Barn och Ungdomar, säger i tidningen Leva \& Jobba med Assistans att hon ser barnhemmen som en direkt följd av att familjer inte fått assistans för sina barn.
+
+Barnhem. Institutioner. Smaka på orden. Vuxna tvingas flytta från sina hem, föräldrar tvingas lämna sina barn ifrån sig.
+
+Det blev allt värre. Efter en förödande dom i somras beräknades sex tusen personer förlora tidigare beviljade stödtimmar. Före nyår skulle mer än tusen människor förlora ALL den assistans som gjorde det möjligt för dem att leva, snarare än överleva. Tusen. Sex tusen.}{http://www.unt.se/asikt/debatt/antligen-backar-regnr-4820060.aspx}
 
 
 \entry{16 nov 2017 - Jenny Wennberg: Regeringens besked är bara en undanmanöver}{Att regeringen inte har några andra ambitioner än att sänka antalet assistanstimmar för funktionshindrade svenskar framgår tydligt. Idag får över 80 procent av alla som söker assistans avslag på sin ansökan.
@@ -1116,19 +1164,19 @@ På det hela taget är det därför också en mycket ful manöver som iscensats 
 
 \entry{17 nov 2017 - Olof förlorar nödvändig hjälp: \say{Orimligt}}{Det tog oss 16 år av kamp att få en väl fungerande hjälp. Nu slås allt i spillror, säger hans mamma Eva Ekström förtvivlat.}{http://www.barometern.se/kalmar/olof-forlorar-nodvandig-hjalp/}
 
-\newpage
-\thispagestyle{plain}
+\entry{18 nov 2017 - Familjens vädjan för hjärnskadade Eija}{Hon inte kan äta själv. Inte röra sig.
+Hon behöver hjälp dygnet runt.
+Men det räcker inte för att familjen ska beviljas särskild LSS-assistans dagtid för dottern Eija, 2,5 – född med en allvarlig hjärnskada.
+Nu vänder sig pappa Mattias Isaksson, 36, direkt till barn- och hälsominister Åsa Regnér:
+\say{Har du sett på när ett barn sakta dör framför dina ögon?}, skriver han på Facebook.}{https://www.expressen.se/nyheter/stockholm/hjarnskadade-eija-far-inte-lss-stod/}
 
-\LARGE Skriv ut detta dokument:
+\entry{18 nov 2017}{Om du tror att vi kan träna bort våra funktionsnedsättningar så har du kanske inte riktigt förstått vad en funktionsnedsättning är. \href{https://funkisfeministen.wordpress.com/2016/03/07/frustrerande-kommentarer-del-4-hen-kan-val-inte-ha-bildschema-hela-livet-heller/}{funkisfeministen.wordpress.com/2016/03/07/fru \ldots} \hash{skolan}}{https://twitter.com/Jonna_A/status/931933216734437376}
 
-\bigskip
+\entry{18 nov 2017}{Jag har inte kunnat ANDAS sen avslagsbeslutet från FK sedan början av september. Varje dag och natt har jag tänkt, oroat, drömt, försökt hitta en lösning på pengar till varenda liten räkning. Jag andas nästan normalt igen när jag tänker på nästa månad.}{https://twitter.com/feministasfk/status/932022369744539649}
 
-\begin{tabular*}{\textwidth}{l m{\textwidth-4cm}}
-\qrcode{http://arneweisse.github.io/samling/samling.html} & \url{http://arneweisse.github.io/samling/samling.html} \\
-\\
-\qrcode{https://github.com/arneweisse/samling/raw/master/samling.pdf} & \url{https://github.com/arneweisse/samling/raw/master/samling.pdf} \\
-\\
-\qrcode{http://github.com/arneweisse/samling} & \url{http://github.com/arneweisse/samling} \\
-\end{tabular*}
+
+\entry{19 nov 2017 - Hon anklagar Försäkringskassan för psykisk misshandel: \say{Det är som om vi inte skulle vara människor}}{}{https://www.st.nu/logga-in/hon-anklagar-forsakringskassan-for-psykisk-misshandel-det-ar-som-om-vi-inte-skulle-vara-manniskor}
+
+
 
 \end{document}

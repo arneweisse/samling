@@ -11,6 +11,8 @@
 \usepackage{calc}
 \usepackage{fancyhdr}
 \usepackage{fontspec}
+\usepackage{etoolbox}
+\usepackage{forloop}
 
 %\let\oldqrcode\qrcode
 %\renewcommand{\qrcode}[1]{\parbox[b][1cm]{1cm}{\oldqrcode{#1}}}
@@ -38,35 +40,44 @@ end}
 \href{http://twitter.com/hashtag/\directlua{tex.print(url_encode('#1'))}}{\##1}
 }
 
-
-
+\newcounter{entrycnt}
+\newcommand\addentry[4]{
+  \stepcounter{entrycnt}
+  \csdef{title\theentrycnt}{#1}
+  \csdef{preamble\theentrycnt}{#2}
+  \csdef{url\theentrycnt}{#3}
+  \csdef{extras\theentrycnt}{#4}
+}
 \newcommand{\entry}{
 \catcode`\%=12
 \@entry}
 \newcommand{\@entry}[4][]{
-\bigskip
-\begin{tabular*}{\textwidth}{l m{\textwidth-4cm}}
-\qrcode{#4} & \textbf{#2}
-
-\medskip
-
-\url{#4}
-
-\end{tabular*}
-
-\medskip
-
-
-\begin{multicols}{2}
-#3
-\end{multicols}
-
-#1
-
-\medskip
-\hrule
-
+\addentry{#2}{#3}{#4}{#1}
 \catcode`\%=14
+}
+
+\newcommand\makeentry[1]{
+	\bigskip
+	\begin{tabular*}{\textwidth}{l m{\textwidth-4cm}}
+	\qrcode{\csuse{url#1}} & \textbf{\csuse{title#1}}
+
+	\medskip
+
+	\url{\csuse{url#1}}
+
+	\end{tabular*}
+
+	\medskip
+
+
+	\begin{multicols}{2}
+	\csuse{preamble#1}
+	\end{multicols}
+
+	\csuse{extras#1}
+
+	\medskip
+	\hrule
 }
 \makeatother
 
@@ -307,7 +318,7 @@ Nån dag kanske jag klarar av att skriva om hur det blev som det är idag.
 
 \entry{27 aug 2017}{DETTA!! Hur fan kan FK påstå att det finns såna här jobb?\begin{quotation}\say{Försäkringskassan ifrågasätter inte dina besvär, men bedömer att du kan ta ett arbete som är lämpligt utifrån dina förutsättningar. Förslagsvis ett arbete där du inte behöver gå, stå eller anstränga dig fysiskt samt där du inte utsätts för stress eller behöver utföra koncentrationskrävande uppgifter.}\end{quotation}}{https://twitter.com/KatrinFriberg/status/901789875493638145}
 
-\entry{28 nov 2017}{Gråter över twittervän som dog av sin sjukdom i april. Förklarad 100\% arbetsför av FK. Det här är så jävla orimligt. \hash{fkstress} \hash{\detokenize{fk_hetsjakt}}}{https://twitter.com/cwellton/status/902135024832712704}
+\entry{28 aug 2017}{Gråter över twittervän som dog av sin sjukdom i april. Förklarad 100\% arbetsför av FK. Det här är så jävla orimligt. \hash{fkstress} \hash{\detokenize{fk_hetsjakt}}}{https://twitter.com/cwellton/status/902135024832712704}
 
 \entry{30 augusti 2017}{Sjuktalen har sjunkit på senare tid, och häromdagen visade vi att det till stor del beror på en hårdare handläggning på Försäkringskassan. Nu kommer FÖRDJUPNINGSKURSEN OM FÖRSÄKRINGSKASSAN. Vad är det som har ändrats på den här tiden? Det är i alla fall inte lagar eller regler.}{https://www.facebook.com/tsbalans/videos/1978702759054700/}
 
@@ -1258,6 +1269,9 @@ När ämnet skulle debatteras stod Annika Strandhäll (S) och Jonas Sjöstedt (V
 I kvällens Aktuellt duckar socialminister Annika Strandhäll från att debattera frågan med vänsterledaren Jonas Sjöstedt som också är inbjuden.
 – Jag tycker att det här är ett sätt att smita i debatten, säger Sjöstedt.}{https://www.expressen.se/dinapengar/forsakringar/alltfler-sjukskriva-blir-av-med-sjukpenning-/}
 
+
+\entry{28 nov 2017}{Har en väninna som är godeman. Det hon får lägga mest tid på nu är att strida mot FK som friskförklarar hennes klienter trots att de inte ens kan kan sköta sin egen ekonomi pga av psykoser. Hon har suttit vid mitt köksbord i en dryg timma och gråtit av vanmakt. Hur länge kommer hon orka strida för \say{sina skyddslingar}, som hon kallar dem?}{https://twitter.com/BylineBelife/status/935491716227923970}
+
 \entry{29 nov 2017 - Vår glada dotter har brutits ner till en sorgsen människa}{Det måste kännas väldigt kränkande för alla läkare vars intyg inte gäller hos Försäkringskassan.}{http://www.st.nu/opinion/insandare/var-glada-dotter-har-brutits-ner-till-en-sorgsen-manniska}
 
 \entry{29 nov 2017 - \say{Sjukförsäkringen en akilleshäl för S}}{Regeringens mål om sänkt sjukfrånvaro får Försäkringskassan att göra orimligt hårda bedömningar av rätten till sjukpenning. Det hävdar LO, som talar om rättsskandal.}{https://arbetet.se/2017/11/29/sjukforsakringen-en-akilleshal-for-s/}
@@ -1267,5 +1281,27 @@ I kvällens Aktuellt duckar socialminister Annika Strandhäll från att debatter
 \entry{29 nov 2017 - Vad hände med löftena om sjukförsäkringen?}{Inför valet 2014 stod frågan om sjukförsäkringen högt uppe på den politiska dagordningen. Många personer vittnade om svårigheterna att få ersättning, om underkännanden av sjukintyg från läkare, hur de föll mellan stolar då de var för sjuka för att jobba men för friska för att vara sjuka. Många berättade om utförsäkring och om skammen över att inte kunna försörja sig. Frågan engagerade många och löftena om en bättre och mer täckande sjukförsäkring kom från flera håll.}{http://www.lo.se/start/seminarium/vad_hande_med_loftena_om_sjukforsakringen}
 
 \entry{29 nov 2017 - Ledare: Pendeln har svängt för långt. Justera sjukvillkoren.}{Och visst hamnar människor i kläm – men inte i första hand mellan olika myndigheter, utan snarare mellan verkligheten och de politiska målen.}{https://www.sydsvenskan.se/2017-11-29/pendeln-har-svangt-for-langt-justera-sjukvillkoren}
+
+\entry{30 nov 2017 - \say{Vad är regeringens definition av human sjukförsäkring?}}{Istället för att målet är just det, - ett mål, blir det ett tak. Och för att inte spräcka de övre nivåerna (som nio dagar i sjukpenningtaket eller 18.000 personer med sjukersättning och år) väljer man att helt enkelt inte bevilja sjukskrivna ersättning.}{https://www.folkbladet.nu/1971212}
+
+\entry{30 nov 2017 - Sluta jaga de sjukskrivna}{Regeringen har målet att pressa ner sjuktalen. Det är i grunden en positiv målsättning, men den får inte gå över till en hetsjakt på sjuka. Dessvärre kommer allt fler exempel på att Försäkringskassan går för hårt fram.}{https://www.vf.se/ledare/sluta-jaga-de-sjukskrivna/}
+
+\entry{1 dec 2017}{2,5 år utan en krona. AF slängde ut mig med för jag är för sjuk. Tycker du att FK tagit ett noggrant beslut? @strandhall \hash{mellanstolarna} \hash{FK}}{https://twitter.com/KidsAreFuture/status/936573538873602048}
+
+\entry{1 dec 2017}{Snälla @strandhall jag orkar inte mer. Jag orkar inte ännu en förtvivlad kommunalarbetande äldre kvinna, med söndervärkt kropp som fått avslag från Försäkringskassan som gråter i telefon. Jag slits itu över att jag som @FacketKommunal inte kan hjälpa henne mot orättvisan.}{https://twitter.com/LoanSundman/status/936652052901580800}
+
+\entry{2 dec 2017 - Zandra, 29, har MS – kan inte leva av aktivitetsstödet: \say{Det är en enorm stress}}{Det finns inte en person som kan svara på alla frågor, utan jag hänvisas hela tiden runt till olika personer och enheter på Försäkringskassan, berättar hon. Nu har Zandra lämnat in ansökan om socialbidrag. – Det är det som återstår. Vad har vi för trygghetssystem i det här landet när en ung människa \ldots}{https://www.allehanda.se/logga-in/zandra-29-har-ms-kan-inte-leva-av-aktivitetsstodet-det-ar-en-enorm-stress}
+
+\entry{2 dec 2017 - Peter Boström: Bättre koll på bilar än människor}{Det kallas Försäkringskassan. Försäkringskassan gör allt det som bilprovningen gör med bilar, fast med människor - och tvärtom. Den som 2017 rullas in vid Försäkringskassan behöver inte direkt vara orolig för att blir utdömd. På Försäkringskassan 2017 stämplas alla som antingen fullt eller i vart fall delvisa körbara. En människokropp tycks vara mindre noggrann att reparera, hålla under uppsikt och låta vila, i alla fall än en normalsliten bil med taskiga mönsterdjup och dåliga bromsskivor.}{http://www.olandsbladet.se/asikter/peter-bostrom-battre-koll-pa-bilar-an-manniskor/}
+
+\entry{2 dec 2017 - De svagaste får ta mest  stryk}{\say{Någonstans runt 15 000 personer i landet berörs av Försäkringskassans tolkningar av de domar som tagits i Högsta förvaltningsdomstolen. Det som drabbar dem är ett oerhört stort lidande. Det är ett hån. Det är ett straff.}
+
+Att andas är inget grundläggande behov. Eller att över huvud taget kunna klara sin vardag. Det har tusentals personer i landet fått veta, när deras personliga assistans har blivit indragen.}{http://www.barometern.se/debatt/de-svagaste-far-ta-mest-stryk/}
+
+\entry{2 dec 2017 - Den inhumana sjukförsäkringen – Varför ministern inte vågar ta debatten}{Varför vill inte Annika Strandhäll debattera sjukförsäkringen med Jonas Sjöstedt? Svaret är så enkelt som att hon vet att vår beskrivning är sann men att hon också vet att hon inte kan inte säga det. Det skulle syna regeringens bluff om att de hanterat problemet med allt sämre arbetsmiljö i vård, skola och omsorg och det skulle bli tydligt att de vallöften som gavs i valrörelsen 2014 inte uppfyllts, utan att Socialdemokraterna i praktiken gjort det lättare att utförsäkra sjuka.}{http://tankesmedjanbalans.se/den-inhumana-sjukforsakringen-varfor-ministern-inte-vagar-ta-debatten/}
+
+\forloop[-1]{entrycnt}{\theentrycnt}{\theentrycnt > 0}{
+	\makeentry{\theentrycnt}
+}
 
 \end{document}

@@ -13,6 +13,7 @@
 \usepackage{fontspec}
 \usepackage{etoolbox}
 \usepackage{forloop}
+\usepackage{graphicx}
 
 %\let\oldqrcode\qrcode
 %\renewcommand{\qrcode}[1]{\parbox[b][1cm]{1cm}{\oldqrcode{#1}}}
@@ -38,10 +39,13 @@ function url_encode(str)
   return str
 end
 
+function escape_(str)
+	return string.gsub(str, "\string_", "\string\\_")
+end
 function twitterify(str)
 	print("===============================================\string\n")
-	str = string.gsub(str, "@(\@percentchar w+)", "\string\\href{http://twitter.com/\@percentchar1}{@\@percentchar1}")
-	str = string.gsub(str, "\string\\\string#([\@percentchar wåäöÅÄÖ_]+)", function(a) return "\string\\href{http://twitter.com/hashtag/" .. url_encode(a) .. "}{\string\\\string#" .. string.gsub(a, "\string_", "\string\\_") .. "}" end)
+	str = string.gsub(str, "@([\@percentchar w_]+)", function(a) return "\string\\href{http://twitter.com/" .. a .. "}{@" .. escape_(a) .. "}" end)
+	str = string.gsub(str, "\string\\\string#([\@percentchar wåäöÅÄÖ_]+)", function(a) return "\string\\href{http://twitter.com/hashtag/" .. url_encode(a) .. "}{\string\\\string#" .. escape_(a) .. "}" end)
 	print(str)
 	print("===============================================\string\n")
 	return str
@@ -81,8 +85,7 @@ end
 	\begin{multicols}{2}
 	\csuse{preamble#1}
 	\end{multicols}
-
-	\csuse{extras#1}
+	\ifcsempty{extras#1}{}{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{\csuse{extras#1}}}
 
 	\medskip
 	\hrule
@@ -198,7 +201,7 @@ Socialförsäkringsminister Annika Strandhäll är dock inte nöjd. Såklart hon
 
 Nej, alltså \ldots hon är inte missnöjd med avslagen. Hon är missnöjd med att det är fortfarande är så många som får sjukpenning – speciellt kvinnor}{http://tankesmedjanbalans.se/sjuktal/}
 
-\entry[{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{879267487245885440.jpg}}]{26 jun 2017}{Del av min interaktion med  \#försäkringskassan idag. Jag blir galen!
+\entry[879267487245885440]{26 jun 2017}{Del av min interaktion med  \#försäkringskassan idag. Jag blir galen!
 Och som vanligt hamnar patienten mest i kläm\ldots}{https://twitter.com/matshogmark/status/879267487245885440}
 
 \entry{3 jul 2017 - Systemet slår hårt mot personer med psykisk sjukdom}{Den psykiska ohälsan ökar i samhället. Samtidigt drar Försäkringskassan in sjukpenningen för allt fler då man bedömer att arbetsförmågan inte är nedsatt.}{https://www.sydsvenskan.se/2017-07-03/systemet-slar-hart-mot-personer-med-psykisk-sjukdom}
@@ -581,7 +584,7 @@ FKs vision är att msk ska känna trygghet när livet tar en ny vändning. Änd�
 Sjuka och funkisar porträtteras regelbundet i media som lata manipulerande fuskare som birde skärpa till sig och skaffa ett jobb!
 }{https://twitter.com/livetsbilder/status/917649999118430208}
 
-\entry[{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{diagram16.jpg}}]{12 okt 2017}{FK nekar allt oftare sjukpenning mitt i ett pågående sjukfall. Här ser vi närmast en explosionsartad utveckling.}{https://twitter.com/KjellRautio/status/918404541233627136}
+\entry[diagram16]{12 okt 2017}{FK nekar allt oftare sjukpenning mitt i ett pågående sjukfall. Här ser vi närmast en explosionsartad utveckling.}{https://twitter.com/KjellRautio/status/918404541233627136}
 
 \entry{13 okt 2017 - Barnhem byggs åter för funktionshindrade}{Maria Persdotter som är ordförande för RBU, Riksförbundet för Rörelsehindrade Barn och Ungdomar (RBU) skriver på Facebook:
 
@@ -811,7 +814,7 @@ Ett löfte från staten om att den ska ta hand om en, när man inte klarar sig s
 
 Sedan en tid är det inte längre ett löfte. Den som blir sjuk måste utanpå själva sjukdomen också oroa sig för om läkarintyget ska godkännas av Försäkringskassan.}{http://www.st.nu/opinion/ledare/sofia-mirjamsdotter-nar-forsakringskassan-stjalper-i-stallet-for-hjalper}
 
-\entry[{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{DNd2yLLW4AAke-R.jpg}}]{31 okt 2017}{Genom att sparka på oss som redan ligger får \#Regeringen \#Alliansen \#Försäkringskassan ner sjuktalen i statistiken. Ruttet!}{https://twitter.com/A_sick_world/status/925338895851622400}
+\entry[DNd2yLLW4AAke-R]{31 okt 2017}{Genom att sparka på oss som redan ligger får \#Regeringen \#Alliansen \#Försäkringskassan ner sjuktalen i statistiken. Ruttet!}{https://twitter.com/A_sick_world/status/925338895851622400}
 
 
 \entry{1 nov 2017 - Löfvens hårda attityd mot funktionshindrade}{Stefan Löfven riskerar att bli den statsminister som lägger ner assistanshjälpen till funktionshindrade. Den röd-gröna regeringen har hittills visat en obegripligt hård attityd mot människor med funktionsnedsättningar.
@@ -1136,7 +1139,7 @@ Vi kräver att:
 
 \entry{15 nov 2017}{Försäkringskassans logik är så ologisk att det är lätt att tvivla på sin egen tolkningsförmåga och verklighetsförankring när man läser deras tolkningar och beslut. Lever vi på samma planet? \#fkstress}{https://twitter.com/livetsbilder/status/930808943915433985}
 
-\entry[{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{930803547054239744.png}}]{15 nov 2017}{}{https://twitter.com/IsVittra/status/930803547054239744} % 930803547054239744.png är en screenshot på denna tweet då jag inte orkat transcribera..
+\entry[930803547054239744]{15 nov 2017}{}{https://twitter.com/IsVittra/status/930803547054239744} % 930803547054239744.png är en screenshot på denna tweet då jag inte orkat transcribera..
 
 
 \entry{15 nov 2017 - Maktlösheten fick läkaren Anders Jeppsson att bränna ut sig}{Ekonomer och byråkrater har tagit makten över sjukvården och låter inte dem som har kunskapen sköta jobbet, menar 65-årige läkaren Anders Jeppsson. Enligt honom har vårdpersonalen alltid haft mycket att göra. \say{I dag är det maktlösheten och inte stressen som får så många att vilja lämna sina jobb.}}{https://www.dn.se/insidan/maktlosheten-fick-lakaren-anders-jeppsson-att-branna-ut-sig/}
@@ -1205,7 +1208,7 @@ Nu vänder sig pappa Mattias Isaksson, 36, direkt till barn- och hälsominister 
 
 \entry{19 nov 2017 - Hon anklagar Försäkringskassan för psykisk misshandel: \say{Det är som om vi inte skulle vara människor}}{}{https://www.st.nu/logga-in/hon-anklagar-forsakringskassan-for-psykisk-misshandel-det-ar-som-om-vi-inte-skulle-vara-manniskor}
 
-\entry[{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{DO_9zK1WAAEUcmc.jpg}}]{19 nov 2017}{Om försäkringskassan skulle ta över bilprovningen. \Emoji{😊}}{https://twitter.com/_nallen_/status/932242707044544512}
+\entry[DO_9zK1WAAEUcmc]{19 nov 2017}{Om försäkringskassan skulle ta över bilprovningen. \Emoji{😊}}{https://twitter.com/_nallen_/status/932242707044544512}
 
 \entry{21 nov 2017 - Orolig väntan på Försäkringskassans beslut}{Omkring 1.000 personer har förlorat sin statliga personliga assistans de senaste två åren.
 Familjen Klinthammar är några av dem som nu väntar oroligt på ett nytt beslut för sonen Lucas.
@@ -1229,7 +1232,7 @@ Familjen Klinthammar är några av dem som nu väntar oroligt på ett nytt beslu
 
 \entry{22 nov 2017 - \say{Sjukförsäkringen inte längre rättssäker}}{Trots hård kritik har regeringen valt att behålla tidsgränserna i sjukförsäkringen. Det kombinerat med kravet på Försäkringskassan att minska antalet utbetalningar gör att sjukförsäkringen inte längre är rättssäker. Det vill vi se en ändring på, skriver LO-distriktet i Stockholms län genom ordförande Marie Jokio.}{https://arbetet.se/2017/11/22/sjukforsakringen-inte-langre-rattssaker/}
 
-\entry[{\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{DPUeE3UX4AAWH7G.jpg}}]{23 nov 2017}{\#intygnobbat}{https://twitter.com/AndersLinander/status/933685571372961792}
+\entry[DPUeE3UX4AAWH7G]{23 nov 2017}{\#intygnobbat}{https://twitter.com/AndersLinander/status/933685571372961792}
 
 \entry{23 nov 2017 - Sjukförsäkringen - en utsorteringsmekanism}{Sjukförsäkringen har kommit att bli en utsorteringsmekansim som inte fungerar på ett rättssäkert sätt och får förödande konsekvenser för de drabbade. Enskilda personer, läkare och fackliga organisationer vittnar om stora brister i Försäkringskassans bedömningar av arbetsförmåga och rätten till ersättning. Allt fler människor får sin sjukpenning indragen till följd av Försäkringskassans hårdare bedömningar av arbetsförmågan efter regeringens uppdrag att minska sjukpenningtalet. Bedömningar som många gånger är rent oskäliga. Och som kan bidra till att den sjuke blir än sjukare.}{http://stockholm.lo.se/stockholm/uttalande_sjukforsakringen_en_utsorteringsmekanism}
 
@@ -1376,6 +1379,47 @@ Min onkolog jobbar med att rädda liv - och ni kräver en uppsats varje gång ha
 
 \entry{6 dec 2017 - Forskare: Kamp för sänkta sjuktal drabbar kvinnor}{Sjukreglerna som de tillämpas i dag är rättsosäkra, tycker juridikprofessor Ruth Mannelqvist. Hon är mycket kritisk till att Försäkringskassan arbetar mot ett politiskt mål om att få ned sjuktalen. Kön och klass blir väldigt tydligt här, säger hon.}{http://www.dagensarena.se/innehall/forskare-kamp-sankta-sjuktal-drabbar-kvinnor/}
 
+\entry{6 dec 2017}{Man kan helt enkelt inte resa sig från döden ena dagen, till att vara fullt arbetsför nästa, som FK anser. Livet måste vara mer värt än så. Vi är inga robotar.}{https://twitter.com/CatzSto/status/938538263408775169}
+
+\entry{6 dec 2017}{Hur många klarar av att förlora hela sin inkomst från ena dagen till den andra? När en av sex inte klarar en oförutsedd utgift på 5000kr. När Försäkringskassan avslår sjukpenning för sjuka förlorar de hela sin inkomst. De kan inte att arbeta = fattig.}{https://twitter.com/MargaretaBergkv/status/938516370064576512}
+
+\entry{6 dec 2017}{Väldigt bra!
+Jag skriver sjukintyg \& lägger mkt möda på formuleringar som inte har direkt med sjukdomen/symptomen att göra. Allt för att slippa påbackning fr FK som tar enormt mkt tid för mig + skapar oro, frustration \& dåligt mående för pat.
+Ett Sisyfosarbete!}{https://twitter.com/matshogmark/status/938488777311440896}
+
+\entry{6 dec 2017}{Man blir inte deprimerad av sin autism, man blir deprimerad av hur världen ser på en, hur man behandlas och all skit folk säger om oss. Det är vad som får oss att ta livet av oss. Det kan inte vi ändra, det måste andra ändra.}{https://twitter.com/HannaFriden/status/938433565016100864}
+
+\entry{6 dec 2017}{Cancer, hörapparat pga cytostatika, tinnitus pga cytostatika, djup depression, diabetes pga antidepressiva, fibromyalgi förväntas börja jobba heltid på måndag eller säga upp sig och söka lättare jobb. Tack @strandhall @socialdemokrat Detta är konsekvensen av er statistikjakt.}{https://twitter.com/valbloggnu/status/938428480093609986}
+
+\entry{6 dec 2017 - Tänk om och tänk rätt}{Jag blir ledsen, förbannad och förtvivlad när jag ser hur staten behandlar en liten grupp människor som haft oturen att födas med, i mina ögon, ofattbara problem. Trots att de flesta har samma tankar och visioner som vi andra, så blir de förbjudna ett ens få en chans att leva ut sina drömmar.}{https://www.magasinetparagraf.se/nyheter/kronikor/50743-tank-om-och-tank-ratt/}
+
+\entry{7 dec 2017 - Renée vann mot myndigheten: \say{Glad över att jag inte gav upp}}{Hon fick höra att hon inte kunde vara arbetslös och ha sjukpenning. Läkaren sjukskrev henne fortsatt men Försäkringskassan ansåg att hon inte var tillräckligt sjuk för att få sjukpenning. När hon tog kontakt med arbetsförmedlingen fick hon veta att hon inte kunde få jobb eftersom hon var sjukskriven.
+
+Under lång tid fick Renée Fransson kämpa mot Försäkringskassan och det gick så långt att hon drabbades av depression. Men till sist fick hon rätt mot myndigheten.}{http://www.barometern.se/monsteras/renee-vann-seg-kamp-mot-myndigheten/}
+
+
+\entry{7 dec 2017 - Så brändes sjukförsäkringen bort}{Men politiken vilar också på samma felaktiga grundtanke som under Alliansåren: att folk inte är så sjuka som de påstår, att deras läkare inte är att lita på, att systemet överutnyttjas.}{https://www.etc.se/ekonomi/sa-brandes-sjukforsakringen-bort}
+
+\entry{7 dec 2017 - Systemet slår hårt mot sjuka}{}{http://www.vlt.se/opinion/insandare/systemet-slar-hart-mot-sjuka}
+
+\entry{8 dec 2017 - Vårt trygghetssystem som gjorde oss världskända har raserats – Sverige, vad hände?}{Socialdemokraterna gick till val med påståendet att de skulle sluta stänga ute sjuka människor ur vårt trygghetssystem. Nu lever partiet inte upp till löftet utan gör precis tvärtom. Försäkringskassans avslag av sjukintyg har varit 2 procent under 2015, 4 procent under 2016 och ser nu ut att stiga exponentiellt}{http://www.st.nu/opinion/insandare/vart-trygghetssystem-som-gjorde-oss-varldskanda-har-raserats-sverige-vad-hande}
+
+\entry{8 dec 2017 - Yonna Waltersson: Sjuka ska inte hamna i fattigdom}{När regeringen lägger sina förslag på åtgärder för att stärka tryggheten i sjukförsäkringen finns inget utrymme för halvmesyrer. Den är för viktig för att slarvas bort, skriver Arbetets chefredaktör.}{https://arbetet.se/2017/12/08/sjuka-ska-inte-hamna-i-fattigdom/}
+
+\entry{8 dec 2017 - \say{Ta till er av kritiken mot sjukförsäkringen, S}}{Bristerna i sjukförsäkringen är så allvarliga att de riskerar underminera förtroendet för välfärdssamhället. Regeringen måste snarast göra något åt sjukförsäkringen. Det skriver Per-Erik Johansson och Ulf Björk IF Metall, avdelning Södra Västerbotten.}{https://arbetet.se/2017/12/08/ta-till-er-av-kritiken-mot-sjukforsakringen-s/}
+
+\entry[DQhqgGaWsAEXLJ9]{8 dec 2017}{Specialistläkaren på Stora Sköndals ME-mottagning sätter ned foten. Frågan om FK bryr sig över huvud taget? \#MECFS \#fkstress \#svmed \#svpol}{https://twitter.com/KatrinFriberg/status/939117675472703488}
+
+\entry[DQhlEArW4AYDcQS]{8 dec 2017}{Samtidigt som FK på eget bevåg utreder mig för sjukersättning vet de inte om jag får sjukpenning utan att fråga FMR...
+
+@fk_media @strandhall @socialdemokrat @socialdep}{https://twitter.com/jag_e_pippi/status/939111644302598144}
+
+\entry{8 dec 2017 - \say{Bristande LSS-kompetens har raserat lagen}}{\say{Ett av målen med LSS är att personer med omfattande funktionsnedsättningar och deras anhöriga ska få leva som alla andra. På grund av en HFD-dom har det blivit svårt att få ledsagarservice utanför hemkommunen och de som vill göra en semesterresa är hänvisade till sin närmiljö. Kommunarrest är inte att leva som andra!}, skriver Thomas Jansson och Julia Henriksson.}{https://www.svt.se/opinion/jansson-o-henriksson-om-lss}
+
+\entry{8 dec 2017 - INSÄNDARE: Döp om Försäkringskassan till Försämringskassan}{Då fick man lära sig att det läkaren skrivit var rätt och att få sjuka bluffade. Vi fick ordentlig utbildning och respekt. I dag spelas roulette med sjuka människor och läkarna blir överkörda.}{http://www.op.se/jamtland/insandare-dop-om-forsakringskassan-till-forsamringskassan}
+
+\entry{8 dec 2017}{Lagstiftaren utgår från att AF och FK har samma syn på arbetsförmåga men det har de inte. Sjuka hamnar mellan stolarna och FK säger att det ändå är 97 \% som får stöd. Det är alltså okej att strunta i 15-20 tusen sjuka personer?
+Samtidigt försvinner miljarder till skatteparadis.}{https://twitter.com/HenrikLundSALO/status/939151889631010816}
 
 \forloop[-1]{entrycnt}{\theentrycnt}{\theentrycnt > 0}{
 	\makeentry{\theentrycnt}
